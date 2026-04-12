@@ -1,3 +1,4 @@
-loadstring(game:HttpGet("https://pastefy.app/7O2hN2R3/raw"))()
-wait(1)
-loadstring(game:HttpGet("https://rawscripts.net/raw/Murder-Mystery-2-mm2-chams-gui-3970"))()
+wait(60)
+if workspace:FindFirstChild("DailySpinWheel") or workspace:FindFirstChild("IntermissionLobby") then
+	game:GetService("TeleportService"):Teleport(3260590327)
+end
