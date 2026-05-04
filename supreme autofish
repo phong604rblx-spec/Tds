@@ -1,0 +1,142 @@
+task.spawn(function()
+    local plr = game.Players.LocalPlayer
+
+function click()
+    local tool = plr.Character and plr.Character:FindFirstChildOfClass("Tool")
+    if tool then
+        tool:Activate()
+        tool:Deactivate()
+    end
+end
+
+-- call không block
+function call()
+    task.spawn(function()
+        game:GetService("ReplicatedStorage")
+            :WaitForChild("Shared")
+            :WaitForChild("DataStreams")
+            :WaitForChild("FishBiting")
+            :InvokeServer()
+    end)
+end
+
+-- UI
+local gui = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
+gui.ResetOnSpawn = false
+
+local btn = Instance.new("TextButton", gui)
+btn.Size = UDim2.new(0,120,0,40)
+btn.Position = UDim2.new(0,10,0,10)
+btn.Text = "OFF"
+
+local on = false
+
+btn.MouseButton1Click:Connect(function()
+    on = not on
+    btn.Text = on and "ON" or "OFF"
+
+    if on then
+        task.spawn(function()
+            while on do
+                click()
+                task.wait(0.8)
+
+                call() 
+                task.wait(0.6)
+
+                click()
+                task.wait(0.3)
+
+                click()
+                task.wait(0.5)
+
+                click()
+                
+                click()
+                task.wait(0.6)
+
+                click()
+                task.wait(0.2)
+            end
+        end)
+    end
+end)
+    end)
+
+task.spawn(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end)
+
+task.spawn(function()
+-- Tạo nút ON/OFF (góc phải trên cùng, không mất khi reset)
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false  -- Không mất khi reset
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local btn = Instance.new("TextButton", gui)
+btn.Size = UDim2.new(0, 100, 0, 50)
+btn.Position = UDim2.new(1, -110, 0, 10)
+btn.Text = "ON"
+btn.BackgroundColor3 = Color3.fromRGB(70, 255, 70)
+
+local on = true
+local rs = game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("DataStreams")
+
+-- Chạy loop
+task.spawn(function()
+    while true do
+        if on then
+            rs:WaitForChild("processGameItemSold"):InvokeServer("SellEverything")
+            rs:WaitForChild("SetEquippedItem"):InvokeServer(1)
+        end
+        wait(10)
+    end
+end)
+
+-- Bấm để ON/OFF
+btn.MouseButton1Click:Connect(function()
+    on = not on
+    btn.Text = on and "ON" or "OFF"
+    btn.BackgroundColor3 = on and Color3.fromRGB(70, 255, 70) or Color3.fromRGB(255, 70, 70)
+end)
+    end)
+
+task.spawn(function()
+    local mt = getrawmetatable(game)
+setreadonly(mt, false)
+
+local old = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+
+    if method == "InvokeServer" 
+    and tostring(self) == "FishBiting" 
+    and not checkcaller() then
+        return nil -- chỉ chặn game
+    end
+
+    return old(self, ...)
+end)
+    end)
+
+task.spawn(function()
+    local rods = require(game.Players.LocalPlayer.PlayerScripts
+    .OldClient.Systems.PlayerSystem.PlayerToolManager.Rods)
+
+task.spawn(function()
+    while true do
+        local rod = rods.currentRod
+        if rod then
+            if rod.reelingSpeed then
+                rod.reelingSpeed = 30
+            elseif rod.stats and rod.stats.reelingSpeed then
+                rod.stats.reelingSpeed = 30
+            end
+        end
+        task.wait()
+    end
+end)
+    end)
+
