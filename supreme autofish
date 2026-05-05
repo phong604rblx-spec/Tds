@@ -39,7 +39,7 @@ btn.MouseButton1Click:Connect(function()
         task.spawn(function()
             while on do
                 click()
-                task.wait(0.5)
+                task.wait(0.6)
 
                 call() 
                 task.wait(0.6)
